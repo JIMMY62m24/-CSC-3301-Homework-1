@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSC-3301 Homework 1 Presentation</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+        
+        .slide {
+            width: 90%;
+            max-width: 1200px;
+            height: 80vh;
+            margin: 5vh auto;
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            display: none;
+            position: relative;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .slide.active {
+            display: block;
+            animation: slideIn 0.6s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .slide h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .slide h2 {
+            color: #3498db;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin: 30px 0 20px 0;
+            font-size: 1.8em;
+        }
+        
+        .slide h3 {
+            color: #e74c3c;
+            margin: 25px 0 15px 0;
+            font-size: 1.4em;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tr:hover {
+            background-color: #e3f2fd;
+            transform: scale(1.01);
+            transition: all 0.3s ease;
+        }
+        
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            overflow-x: auto;
+            border-left: 5px solid #3498db;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
+        }
+        
+        .nav-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .slide-counter {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            background: rgba(52, 152, 219, 0.1);
+            padding: 10px 20px;
+            border-radius: 20px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #e74c3c;
+        }
+        
+        .file-structure {
+            background: #f8f9fa;
+            border: 2px dashed #3498db;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .demo-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        ul {
+            line-height: 1.8;
+        }
+        
+        li {
+            margin: 10px 0;
+            padding-left: 10px;
+        }
+        
+        .command-example {
+            background: #27ae60;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            display: inline-block;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        
+        <!-- Slide 1: Title Slide -->
+        <div class="slide active">
+            <div class="slide-counter">1 / 8</div>
+            <h1>CSC-3301 Operating Systems</h1>
+            <div style="text-align: center; margin: 50px 0;">
+                <h2 style="border: none; color: #2c3e50; font-size: 2em;">Homework 1 Presentation</h2>
+                <div style="margin: 40px 0;">
+                    <p style="font-size: 1.3em; color: #7f8c8d;">Windows Operating Systems & Command Line Operations</p>
+                    <p style="font-size: 1.2em; color: #2c3e50; margin: 20px 0;"><strong>Presented by: Kabore Taryam William Rodrigue</strong></p>
+                    <p style="font-size: 1.1em; color: #95a5a6;">Due: October 25th, 2025</p>
+                </div>
+            </div>
+            <div class="highlight">
+                <h3>Assignment Overview:</h3>
+                <ul>
+                    <li><strong>Exercise 1:</strong> Windows OS and Office Tools Compatibility Analysis</li>
+                    <li><strong>Exercise 2:</strong> Windows Command Line File Operations</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 2: Exercise 1 Introduction -->
+        <div class="slide">
+            <div class="slide-counter">2 / 8</div>
+            <h1>Exercise 1: Windows OS Evolution</h1>
+            <h2>Objective</h2>
+            <p>Analyze Microsoft Office compatibility across Windows operating systems from Windows 2000 to Windows 11</p>
+            
+            <div class="highlight">
+                <h3>Key Learning Points:</h3>
+                <ul>
+                    <li>Understanding OS backward compatibility</li>
+                    <li>Software lifecycle management</li>
+                    <li>Enterprise upgrade planning considerations</li>
+                    <li>Microsoft's support strategy evolution</li>
+                </ul>
+            </div>
+
+            <div class="demo-section">
+                <h3>Research Methodology</h3>
+                <p>Data gathered from official Microsoft documentation and compatibility matrices to ensure accuracy of Office version support across different Windows platforms.</p>
+            </div>
+        </div>
+
+        <!-- Slide 3: Windows OS and Office Compatibility Table -->
+        <div class="slide">
+            <div class="slide-counter">3 / 8</div>
+            <h1>Windows-Office Compatibility Matrix</h1>
+            <table>
+                <tr>
+                    <th>Operating System</th>
+                    <th>Supported Office Tools</th>
+                    <th>Previous Office Versions Not Supported</th>
+                </tr>
+                <tr>
+                    <td><strong>Windows 2000</strong></td>
+                    <td>Office 2000, Office XP, Office 2003</td>
+                    <td>None (baseline)</td>
+                </tr>
+                <tr>
+                    <td><strong>Windows XP</strong></td>
+                    <td>Office 2000, XP, 2003, 2007, 2010</td>
+                    <td>None</td>
+                </tr>
+                <tr>
+                    <td><strong>Windows Vista</strong></td>
+                    <td>Office 2003, 2007, 2010</td>
+                    <td>Office 2000, Office XP</td>
+                </tr>
+                <tr>
+                    <td><strong>Windows 7</strong></td>
+                    <td>Office 2003, 2007, 2010, 2013, 2016</td>
+                    <td>Office 2000, Office XP</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Slide 4: Continued Compatibility Table -->
+        <div class="slide">
+            <div class="slide-counter">4 / 8</div>
+            <h1>Windows-Office Compatibility Matrix (Continued)</h1>
+            <table>
+                <tr>
+                    <th>Operating System</th>
+                    <th>Supported Office Tools</th>
+                    <th>Previous Office Versions Not Supported</th>
+                </tr>
+                <tr>
+                    <td><strong>Windows 8</strong></td>
+                    <td>Office 2010, 2013, 2016</td>
+                    <td>Office 2000, XP, 2003, 2007</td>
+                </tr>
+                <tr>
+                    <td><strong>Windows 8.1</strong></td>
+                    <td>Office 2007, 2010, 2013, 2016</td>
+                    <td>Office 2000, XP, 2003</td>
+                </tr>
+                <tr>
+                    <td><strong>Windows 10</strong></td>
+                    <td>Office 2007, 2010, 2013, 2016, 2019, 2021</td>
+                    <td>Office 2000, XP, 2003</td>
+                </tr>
+                <tr>
+                    <td><strong>Windows 11</strong></td>
+                    <td>Office 2016, 2019, 2021</td>
+                    <td>Office 2000, XP, 2003, 2007, 2010, 2013</td>
+                </tr>
+            </table>
+            
+            <div class="highlight">
+                <h3>Key Observations:</h3>
+                <ul>
+                    <li>Newer Windows versions drop support for older Office versions</li>
+                    <li>Windows 11 has the most restrictive compatibility</li>
+                    <li>Security and architectural changes drive compatibility decisions</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 5: Exercise 2 Introduction -->
+        <div class="slide">
+            <div class="slide-counter">5 / 8</div>
+            <h1>Exercise 2: Windows Command Line Operations</h1>
+            
+            <h2>Task Overview</h2>
+            <div class="highlight">
+                <ol>
+                    <li><strong>File Creation:</strong> Create myTextFile.txt with specified content</li>
+                    <li><strong>Text Extraction:</strong> Extract lines containing "president" or "federal"</li>
+                    <li><strong>File Comparison:</strong> Compare original and extracted files</li>
+                </ol>
+            </div>
+
+            <h2>Key Windows Commands Used</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+                <div>
+                    <h3>File Operations:</h3>
+                    <ul>
+                        <li><span class="command-example">echo</span> - Create file content</li>
+                        <li><span class="command-example">type</span> - Display file contents</li>
+                        <li><span class="command-example">del</span> - Delete files</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Text Processing:</h3>
+                    <ul>
+                        <li><span class="command-example">findstr</span> - Search text patterns</li>
+                        <li><span class="command-example">fc</span> - Compare files</li>
+                        <li><span class="command-example">/i</span> - Case-insensitive flag</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Batch Script Implementation -->
+        <div class="slide">
+            <div class="slide-counter">6 / 8</div>
+            <h1>Batch Script Implementation</h1>
+            
+            <h2>Complete Solution: myScript.bat</h2>
+            <div class="code-block">
+@echo off
+echo Creating myTextFile.txt...
+(
+echo In a ruling dripping with derision, a federal judge has rejected President Trump's defamation lawsuit...
+echo The president's team has been given a month to refile...
+echo Judge Steven D. Merryday of the US District Court for the Middle District of Florida...
+echo A complaint must be a "short, plain, direct statement of allegations of fact,"...
+) > myTextFile.txt
+
+echo Extracting lines containing "president" or "federal"...
+findstr /i "president federal" myTextFile.txt > myResult.txt
+
+echo Comparing files...
+fc myTextFile.txt myResult.txt > myDifference.txt
+
+echo All tasks completed!
+            </div>
+
+            <div class="highlight">
+                <h3>Script Features:</h3>
+                <ul>
+                    <li>Automated file creation with exact content</li>
+                    <li>Case-insensitive pattern matching</li>
+                    <li>Comprehensive file comparison</li>
+                    <li>User-friendly progress indicators</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 7: Expected Results and File Structure -->
+        <div class="slide">
+            <div class="slide-counter">7 / 8</div>
+            <h1>Expected Results & File Structure</h1>
+            
+            <h2>Generated Files</h2>
+            <div class="file-structure">
+                <h3>📁 Project Directory</h3>
+                <ul>
+                    <li>📄 <strong>myScript.bat</strong> - Main batch execution file</li>
+                    <li>📄 <strong>myTextFile.txt</strong> - Original text content (4 lines)</li>
+                    <li>📄 <strong>myResult.txt</strong> - Extracted lines containing keywords</li>
+                    <li>📄 <strong>myDifference.txt</strong> - File comparison results</li>
+                </ul>
+            </div>
+
+            <h2>myResult.txt Content Preview</h2>
+            <div class="code-block">
+In a ruling dripping with derision, a federal judge has rejected President Trump's defamation lawsuit against The New York Times, asserting that the rambling 85-page suit did not follow federal rules for filing civil complaints.
+
+The president's team has been given a month to refile, and a Trump spokesperson indicated that they will do so.
+
+Judge Steven D. Merryday of the US District Court for the Middle District of Florida said Friday that the suit "stands unmistakably and inexcusably athwart the requirements of Rule 8" of the Federal Rules of Civil Procedure.
+            </div>
+
+            <div class="demo-section">
+                <p><strong>Note:</strong> 3 out of 4 lines contain the search keywords "president" or "federal"</p>
+            </div>
+        </div>
+
+        <!-- Slide 8: Conclusion and Learning Outcomes -->
+        <div class="slide">
+            <div class="slide-counter">8 / 8</div>
+            <h1>Conclusion & Learning Outcomes</h1>
+            
+            <h2>Technical Skills Demonstrated</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                <div class="highlight">
+                    <h3>Exercise 1 Skills:</h3>
+                    <ul>
+                        <li>OS compatibility research</li>
+                        <li>Software lifecycle analysis</li>
+                        <li>Data organization and presentation</li>
+                        <li>Enterprise planning considerations</li>
+                    </ul>
+                </div>
+                <div class="highlight">
+                    <h3>Exercise 2 Skills:</h3>
+                    <ul>
+                        <li>Windows command line proficiency</li>
+                        <li>Batch scripting automation</li>
+                        <li>File manipulation operations</li>
+                        <li>Text processing and pattern matching</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2>Real-World Applications</h2>
+            <div class="demo-section">
+                <ul>
+                    <li><strong>System Administration:</strong> Automated log file processing and analysis</li>
+                    <li><strong>DevOps:</strong> Build scripts and deployment automation</li>
+                    <li><strong>Data Processing:</strong> Batch text processing and file management</li>
+                    <li><strong>IT Support:</strong> Understanding compatibility matrices for enterprise planning</li>
+                </ul>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <h2 style="color: #27ae60;">Assignment Complete!</h2>
+                <p style="font-size: 1.2em; color: #7f8c8d;">Thank you for your attention</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" onclick="previousSlide()">← Previous</button>
+        <button class="nav-btn" onclick="nextSlide()">Next →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            
+            // Update navigation buttons
+            const prevBtn = document.querySelector('.navigation button:first-child');
+            const nextBtn = document.querySelector('.navigation button:last-child');
+            
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === totalSlides - 1;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                showSlide(currentSlide + 1);
+            }
+        }
+
+        function previousSlide() {
+            if (currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                previousSlide();
+            }
+        });
+
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+</html>
