@@ -1,0 +1,20 @@
+Comparing files myTextFile.txt and MYRESULT.TXT
+***** myTextFile.txt
+s, asserting that the rambling 85-page suit did not follow federal rules for filing civil complaints.
+
+The president's team has been given a month to refile, and a Trump spokesperson indicated that they will do so.
+
+Judge Steven D. Merryday of the US District Court for the Middle District of Florida said Friday that the suit "stands unmistak
+***** MYRESULT.TXT
+s, asserting that the rambling 85-page suit did not follow federal rules for filing civil complaints.
+The president's team has been given a month to refile, and a Trump spokesperson indicated that they will do so.
+Judge Steven D. Merryday of the US District Court for the Middle District of Florida said Friday that the suit "stands unmistak
+*****
+
+***** myTextFile.txt
+
+A complaint must be a "short, plain, direct statement of allegations of fact," he wrote, and Trump's broadside against The Time
+s was "decidedly improper and impermissible."
+***** MYRESULT.TXT
+*****
+
